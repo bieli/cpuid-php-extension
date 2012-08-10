@@ -17,7 +17,14 @@ What functions are implemented in CPUID PHP extension ?
      * *CPUID_AMD_CPU_DETECTED* - when detected AMD proccessor
      * *CPUID_UNKNOWN_CPU_DETECTED* - when detected unknown proccessor
  * array *cpuid_array()* **IMPELENTED**
-   * return array with CPU specific numerical information
+   * return hash array with CPU specific numerical information in below properties:
+      * stepping
+      * model
+      * family
+      * processor_type
+      * extended_model
+      * extended_family
+
  * long *cpuid_gethostid()* **IMPELENTED**
    * return value of call gethostid()
  * long *cpuid_processors_count()* **IMPELENTED**
