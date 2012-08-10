@@ -20,8 +20,8 @@ What functions are implemented in CPUID PHP extension ?
    * return array with CPU specific numerical information
  * long *cpuid_gethostid()* **IMPELENTED**
    * return value of call gethostid()
- * long *cpuid_cores_count()* **IMPELENTED**
-   * return number of cores installed on machine
+ * long *cpuid_processors_count()* **IMPELENTED**
+   * returns the number of processors which are currently online (i.e., available) in OS
  * array *cpuid_array_desc()* **NOT IMPELENTED**
    * return array with detected CPU information as string
  * array *cpuid_check_future(long)* **NOT IMPELENTED**
@@ -125,7 +125,8 @@ Create PHP test script with new PHP function from this extension:
         cpuid_cpu_detected(),
         cpuid_cpu_detected() === CPUID_INTEL_CPU_DETECTED,
         cpuid_cpu_detected() === CPUID_AMD_CPU_DETECTED,
-        cpuid_cpu_detected() === CPUID_UNKNOWN_CPU_DETECTED
+        cpuid_cpu_detected() === CPUID_UNKNOWN_CPU_DETECTED,
+        cpuid_processors_count()
     );
 
 Press: 'Enter' and 'Ctrl + Z'
@@ -134,19 +135,19 @@ Run test PHP script:
 
     $ php cpuid_test.php
 
-This is example output from PHP test script:
+This is example output from PHP test script (from ASUS EeePC notebook):
 
     array(6) {
       ["stepping"]=>
-      string(1) "9"
-      ["model"]=>
       string(1) "2"
+      ["model"]=>
+      string(2) "12"
       ["family"]=>
-      string(2) "15"
+      string(1) "6"
       ["processor_type"]=>
       string(1) "0"
       ["extended_model"]=>
-      string(1) "0"
+      string(1) "1"
       ["extended_family"]=>
       string(1) "0"
     }
@@ -155,3 +156,4 @@ This is example output from PHP test script:
     bool(true)
     bool(false)
     bool(false)
+    int(2)
