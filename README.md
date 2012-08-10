@@ -11,6 +11,11 @@ What is this ?
 
 What functions are promoted in PHP ?
 -------------
+ * long *cpuid_cpu_detected()* **IMPELENTED**
+   * return values for one of declarated constant:
+     * *CPUID_INTEL_CPU_DETECTED* - when detected Intel proccessor
+     * *CPUID_AMD_CPU_DETECTED* - when detected AMD proccessor
+     * *CPUID_UNKNOWN_CPU_DETECTED* - when detected unknown proccessor
  * array *cpuid_array()* **IMPELENTED**
    * return array with CPU specific numerical information
  * array *cpuid_array_desc()* **NOT IMPELENTED**
@@ -53,8 +58,14 @@ Create PHP test script with new PHP function from this extension:
     $ cat > cpuid_test.php
     <?php
 
-    var_dump(cpuid_array());
-    var_dump(cpuid_gethostid());
+    var_dump(
+        cpuid_array(),
+        cpuid_gethostid(),
+        cpuid_cpu_detected(),
+        cpuid_cpu_detected() === CPUID_INTEL_CPU_DETECTED,
+        cpuid_cpu_detected() === CPUID_AMD_CPU_DETECTED,
+        cpuid_cpu_detected() === CPUID_UNKNOWN_CPU_DETECTED
+    );
 
 Press: 'Enter' and 'Ctrl + Z'
 
@@ -62,20 +73,24 @@ Run test PHP script:
 
     $ php cpuid_test.php
 
-This is output from PHP test script:
+This is example output from PHP test script:
 
     array(6) {
       ["stepping"]=>
-      int(0)
+      string(1) "9"
       ["model"]=>
-      int(8)
+      string(1) "2"
       ["family"]=>
-      int(15)
+      string(2) "15"
       ["processor_type"]=>
-      int(0)
+      string(1) "0"
       ["extended_model"]=>
-      int(0)
+      string(1) "0"
       ["extended_family"]=>
-      int(1)
+      string(1) "0"
     }
     int(8323329)
+    int(1)
+    bool(true)
+    bool(false)
+    bool(false)

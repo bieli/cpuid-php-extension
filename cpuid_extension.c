@@ -5,7 +5,6 @@
  */
 
 //TODO: ONLY Intel processors are detected now - add support for AMD
-//TODO: debug & test detect_cpu();
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -21,9 +20,10 @@
 
 /* Declare the content of this extension globals */
 /* (This actually defines a typedef on a structure) */
+
 int ret;
 char buff[16];
-DWORD cpuid_info[5];
+t_cpu_info cpu_info;
 
 /* Declare the extension's callback for use by the Zend engine */
 PHP_MINIT_FUNCTION(cpuid_init);
@@ -32,12 +32,14 @@ PHP_MINFO_FUNCTION(cpuid_info);
 /* Declare the PHP functions provided by this extension */
 PHP_FUNCTION(cpuid_array);
 PHP_FUNCTION(cpuid_gethostid);
+PHP_FUNCTION(cpuid_cpu_detected);
 
 // list of custom PHP functions provided by this extension
 // set {NULL, NULL, NULL} as the last record to mark the end of list
 static function_entry cpuid_functions[] = {
     PHP_FE(cpuid_array, NULL)
     PHP_FE(cpuid_gethostid, NULL)
+    PHP_FE(cpuid_cpu_detected, NULL)
     {NULL, NULL, NULL}
 };
 
@@ -63,25 +65,18 @@ ZEND_GET_MODULE(cpuid)
 
 
 /*
- *  implementation of a custom cpuid_functions
+ * implementation of a custom cpuid_functions
  */
-
 PHP_MINIT_FUNCTION(cpuid_init)
 {
-    unsigned eax, ebx, ecx, edx;
+    REGISTER_LONG_CONSTANT("CPUID_INTEL_DETECT_MAGIC_CODE", INTEL_DETECT_MAGIC_CODE, CONST_CS|CONST_PERSISTENT);
+    REGISTER_LONG_CONSTANT("CPUID_AMD_DETECT_MAGIC_CODE", AMD_DETECT_MAGIC_CODE, CONST_CS|CONST_PERSISTENT);
 
-//TODO: processor info and feature bits
-//eax = 1;
-    eax = EXTENDED_OFFSET;
+    REGISTER_LONG_CONSTANT("CPUID_INTEL_CPU_DETECTED", CPUID_INTEL_CPU_DETECTED, CONST_CS|CONST_PERSISTENT);
+    REGISTER_LONG_CONSTANT("CPUID_AMD_CPU_DETECTED", CPUID_AMD_CPU_DETECTED, CONST_CS|CONST_PERSISTENT);
+    REGISTER_LONG_CONSTANT("CPUID_UNKNOWN_CPU_DETECTED", CPUID_UNKNOWN_CPU_DETECTED, CONST_CS|CONST_PERSISTENT);
 
-    native_cpuid(&eax, &ebx, &ecx, &edx);
-
-    cpuid_info[0] = eax & 0xF;
-    cpuid_info[1] = (eax >> 4) & 0xF;
-    cpuid_info[2] = (eax >> 8) & 0xF;
-    cpuid_info[3] = (eax >> 12) & 0x3;
-    cpuid_info[4] = (eax >> 16) & 0xF;
-    cpuid_info[5] = (eax >> 20) & 0xFF;
+    cpu_info = get_cpu_info();
 
     return SUCCESS;
 }
@@ -97,39 +92,29 @@ PHP_MINFO_FUNCTION(cpuid_info)
 
 PHP_FUNCTION(cpuid_array)
 {
-/*
-//DEBUG PHP messages
-    php_printf("stepping %d\n", cpuid_info[0]);
-    php_printf("model %d\n", cpuid_info[1]);
-    php_printf("family %d\n", cpuid_info[2]);
-    php_printf("processor type %d\n", cpuid_info[3]);
-    php_printf("extended model %d\n", cpuid_info[4]);
-    php_printf("extended family %d\n", cpuid_info[5]);
-*/
-
     array_init(return_value);
 
-    ret = sprintf(buff, "%ld", cpuid_info[0]);
+    ret = sprintf(buff, "%ld", cpu_info.stepping);
 
     add_assoc_string(return_value, "stepping", buff, 1);
 
-    ret = sprintf(buff, "%ld", cpuid_info[1]);
+    ret = sprintf(buff, "%ld", cpu_info.model);
 
     add_assoc_string(return_value, "model", buff, 1);
 
-    ret = sprintf(buff, "%ld", cpuid_info[2]);
+    ret = sprintf(buff, "%ld", cpu_info.family);
 
     add_assoc_string(return_value, "family", buff, 1);
 
-    ret = sprintf(buff, "%ld", cpuid_info[3]);
+    ret = sprintf(buff, "%ld", cpu_info.type);
 
     add_assoc_string(return_value, "processor_type", buff, 1);
 
-    ret = sprintf(buff, "%ld", cpuid_info[4]);
+    ret = sprintf(buff, "%ld", cpu_info.extended_model);
 
     add_assoc_string(return_value, "extended_model", buff, 1);
 
-    ret = sprintf(buff, "%ld", cpuid_info[5]);
+    ret = sprintf(buff, "%ld", cpu_info.extended_family);
 
     add_assoc_string(return_value, "extended_family", buff, 1);
 }
@@ -137,4 +122,9 @@ PHP_FUNCTION(cpuid_array)
 PHP_FUNCTION(cpuid_gethostid)
 {
     RETURN_LONG(gethostid());
+}
+
+PHP_FUNCTION(cpuid_cpu_detected)
+{
+    RETURN_LONG(cpu_info.cpu_detected);
 }
