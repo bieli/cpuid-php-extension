@@ -21,8 +21,8 @@ What functions are promoted in PHP ?
 How to compile source code ?
 -------------
 
- You need below packages:
-  * php5
+You need below packages:
+ * php5
  * php5-dev
  * php5-cli
  * gcc
@@ -32,58 +32,48 @@ How to compile source code ?
 
 First clone repository:
 
-``$ git clone git://github.com/bieli/cpuid-php-extension.git``
+    $ git clone git://github.com/bieli/cpuid-php-extension.git
 
 Next compile extension:
 
-``
-$ phpize
-$ ./configure OR
-$ make
-$ sudo make install
-``
+    $ phpize
+    $ ./configure OR
+    $ make
+    $ sudo make install
 
 Next create PHP INI configuration file dedicated for this extension:
 
-``
-$ cat > /etc/php5/cli/conf.d/cpuid_extension.ini
-extension=cpuid_extension.so
-``
+    $ cat > /etc/php5/cli/conf.d/cpuid_extension.ini
+    extension=cpuid_extension.so
 
 Press: 'Enter' and 'Ctrl + Z'
 
 Create PHP test script with new PHP function from this extension:
 
-``
-$ cat > cpuid_test.php
-<?php
+    $ cat > cpuid_test.php
+    <?php
 
-var_dump(cpuid_array());
-``
+    var_dump(cpuid_array());
 
 Press: 'Enter' and 'Ctrl + Z'
 
 Run test PHP script:
 
-``
-$ php cpuid_test.php
-``
+    $ php cpuid_test.php
 
 This is output from PHP test script:
 
-``
-array(6) {
-  ["stepping"]=>
-  int(0)
-  ["model"]=>
-  int(8)
-  ["family"]=>
-  int(15)
-  ["processor_type"]=>
-  int(0)
-  ["extended_model"]=>
-  int(0)
-  ["extended_family"]=>
-  int(1)
-}
-``
+    array(6) {
+      ["stepping"]=>
+      int(0)
+      ["model"]=>
+      int(8)
+      ["family"]=>
+      int(15)
+      ["processor_type"]=>
+      int(0)
+      ["extended_model"]=>
+      int(0)
+      ["extended_family"]=>
+      int(1)
+    }
