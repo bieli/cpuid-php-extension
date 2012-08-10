@@ -15,7 +15,7 @@ What functions are promoted in PHP ?
    * return array with CPU specific numerical information
  * array *cpuid_array_desc()* **NOT IMPELENTED**
    * return array with detected CPU information as string
- * long *cuid_gethostid()* **IMPELENTED**
+ * long *cpuid_gethostid()* **IMPELENTED**
    * port of system call gethostid()
 
 How to compile source code ?
@@ -54,6 +54,7 @@ Create PHP test script with new PHP function from this extension:
     <?php
 
     var_dump(cpuid_array());
+    var_dump(cpuid_gethostid());
 
 Press: 'Enter' and 'Ctrl + Z'
 
@@ -77,3 +78,4 @@ This is output from PHP test script:
       ["extended_family"]=>
       int(1)
     }
+    int(8323329)
