@@ -25,16 +25,16 @@ What functions are implemented in CPUID PHP extension ?
  * array *cpuid_check_future(long)* **NOT IMPELENTED**
    * inputed constant for exisiting future in proccessor
 
-        /**
-         * Reference:
-         * http://datasheets.chipdb.org/Intel/x86/CPUID/24161821.pdf
-         * http://www.flounder.com/cpuid_explorer2.htm
-         */
-        enum CpuidFeatures
-        {
-          FPU   = 1<< 0, // Floating-Point Unit on-chip
-          VME   = 1<< 1, // Virtual Mode Extension
-          DE    = 1<< 2, // Debugging Extension
+        > /**
+        >  * Reference:
+        >  * http://datasheets.chipdb.org/Intel/x86/CPUID/24161821.pdf
+        >  * http://www.flounder.com/cpuid_explorer2.htm
+        >  */
+        > enum CpuidFeatures
+        > {
+        >   FPU   = 1<< 0, // Floating-Point Unit on-chip
+        >   VME   = 1<< 1, // Virtual Mode Extension
+        >   DE    = 1<< 2, // Debugging Extension
           PSE   = 1<< 3, // Page Size Extension
           TSC   = 1<< 4, // Time Stamp Counter
           MSR   = 1<< 5, // Model Specific Registers
@@ -80,7 +80,7 @@ What functions are implemented in CPUID PHP extension ?
           CAE   = 1<<13, // CompareAndExchange 16B
         };
 
-   * return array with detected CPU information as string
+   * return boolean true when future exists or false where not exists or null when inputed unknown value
 
 How to compile source code ?
 -------------
