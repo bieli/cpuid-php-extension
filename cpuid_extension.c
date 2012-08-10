@@ -33,6 +33,7 @@ PHP_MINFO_FUNCTION(cpuid_info);
 PHP_FUNCTION(cpuid_array);
 PHP_FUNCTION(cpuid_gethostid);
 PHP_FUNCTION(cpuid_cpu_detected);
+PHP_FUNCTION(cpuid_cores_count);
 
 // list of custom PHP functions provided by this extension
 // set {NULL, NULL, NULL} as the last record to mark the end of list
@@ -40,6 +41,7 @@ static function_entry cpuid_functions[] = {
     PHP_FE(cpuid_array, NULL)
     PHP_FE(cpuid_gethostid, NULL)
     PHP_FE(cpuid_cpu_detected, NULL)
+    PHP_FE(cpuid_cores_count, NULL)
     {NULL, NULL, NULL}
 };
 
@@ -127,4 +129,10 @@ PHP_FUNCTION(cpuid_gethostid)
 PHP_FUNCTION(cpuid_cpu_detected)
 {
     RETURN_LONG(cpu_info.cpu_detected);
+}
+
+PHP_FUNCTION(cpuid_cores_count)
+{
+//TODO: implementing for other OS - http://stackoverflow.com/questions/150355/programmatically-find-the-number-of-cores-on-a-machine
+    RETURN_LONG(sysconf( _SC_NPROCESSORS_ONLN ));
 }

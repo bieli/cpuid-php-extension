@@ -19,7 +19,9 @@ What functions are implemented in CPUID PHP extension ?
  * array *cpuid_array()* **IMPELENTED**
    * return array with CPU specific numerical information
  * long *cpuid_gethostid()* **IMPELENTED**
-   * port of system call gethostid()
+   * return value of call gethostid()
+ * long *cpuid_cores_count()* **IMPELENTED**
+   * return number of cores installed on machine
  * array *cpuid_array_desc()* **NOT IMPELENTED**
    * return array with detected CPU information as string
  * array *cpuid_check_future(long)* **NOT IMPELENTED**
