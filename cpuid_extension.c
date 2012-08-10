@@ -1,3 +1,12 @@
+/*
+ * CPUID - extension for PHP language allow to showing short CPU's info. (on installed server)
+ *
+ * @author Marcin Bielak <marcin.bieli@gmail.com>
+ */
+
+//TODO: ONLY Intel processors are detected now - add support for AMD
+//TODO: debug & test detect_cpu();
+
 #ifdef HAVE_CONFIG_H
 #include "config.h"
 #endif
@@ -12,7 +21,6 @@
 
 /* Declare the content of this extension globals */
 /* (This actually defines a typedef on a structure) */
-
 int ret;
 char buff[16];
 DWORD cpuid_info[5];
@@ -23,13 +31,13 @@ PHP_MINFO_FUNCTION(cpuid_info);
 
 /* Declare the PHP functions provided by this extension */
 PHP_FUNCTION(cpuid_array);
-//PHP_FUNCTION(cpuid_gethostid);
+PHP_FUNCTION(cpuid_gethostid);
 
 // list of custom PHP functions provided by this extension
 // set {NULL, NULL, NULL} as the last record to mark the end of list
 static function_entry cpuid_functions[] = {
     PHP_FE(cpuid_array, NULL)
-//    PHP_FE(cpuid_gethostid, NULL)
+    PHP_FE(cpuid_gethostid, NULL)
     {NULL, NULL, NULL}
 };
 
@@ -62,7 +70,9 @@ PHP_MINIT_FUNCTION(cpuid_init)
 {
     unsigned eax, ebx, ecx, edx;
 
-    eax = 1; // processor info and feature bits
+//TODO: processor info and feature bits
+//eax = 1;
+    eax = EXTENDED_OFFSET;
 
     native_cpuid(&eax, &ebx, &ecx, &edx);
 
@@ -124,9 +134,7 @@ PHP_FUNCTION(cpuid_array)
     add_assoc_string(return_value, "extended_family", buff, 1);
 }
 
-/*
 PHP_FUNCTION(cpuid_gethostid)
 {
-    detect_cpu();
+    RETURN_LONG(gethostid());
 }
-*/

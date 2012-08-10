@@ -4,7 +4,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 // for gethostid funciton: long gethostid(void);
-//#include <unistd.h>
+#include <unistd.h>
 
 /*
 #ifdef _MSC_VER

@@ -15,7 +15,7 @@ What functions are promoted in PHP ?
    * return array with CPU specific numerical information
  * array *cpuid_array_desc()* **NOT IMPELENTED**
    * return array with detected CPU information as string
- * long *cuid_gethostid()* **NOT IMPELENTED**
+ * long *cuid_gethostid()* **IMPELENTED**
    * port of system call gethostid()
 
 How to compile source code ?
