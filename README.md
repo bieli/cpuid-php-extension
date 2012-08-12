@@ -11,12 +11,12 @@ What is this ?
 
 What functions are implemented in CPUID PHP extension ?
 -------------
- * long *cpuid_cpu_detected()* **IMPELENTED**
+ * long *cpuid_cpu_detected()* **IMPLEMENTED**
    * return values for one of declarated constant:
      * *CPUID_INTEL_CPU_DETECTED* - when detected Intel proccessor
      * *CPUID_AMD_CPU_DETECTED* - when detected AMD proccessor
      * *CPUID_UNKNOWN_CPU_DETECTED* - when detected unknown proccessor
- * array *cpuid_array()* **IMPELENTED**
+ * array *cpuid_array()* **IMPLEMENTED**
    * return hash array with CPU specific numerical information in below properties:
       * stepping
       * model
@@ -25,71 +25,62 @@ What functions are implemented in CPUID PHP extension ?
       * extended_model
       * extended_family
 
- * long *cpuid_gethostid()* **IMPELENTED**
+ * long *cpuid_gethostid()* **IMPLEMENTED**
    * return value of call gethostid()
- * long *cpuid_processors_count()* **IMPELENTED**
+ * long *cpuid_processors_count()* **IMPLEMENTED**
    * returns the number of processors which are currently online (i.e., available) in OS
- * array *cpuid_array_desc()* **NOT IMPELENTED**
+ * array *cpuid_array_desc()* **NOT IMPLEMENTED**
    * return array with detected CPU information as string
- * array *cpuid_check_future(long)* **NOT IMPELENTED**
+ * array *cpuid_check_future(long)* **NOT IMPLEMENTED**
    * inputed constant for exisiting future in proccessor
-
-        > /**
-        >  * Reference:
-        >  * http://datasheets.chipdb.org/Intel/x86/CPUID/24161821.pdf
-        >  * http://www.flounder.com/cpuid_explorer2.htm
-        >  */
-        > enum CpuidFeatures
-        > {
-        >   FPU   = 1<< 0, // Floating-Point Unit on-chip
-        >   VME   = 1<< 1, // Virtual Mode Extension
-        >   DE    = 1<< 2, // Debugging Extension
-          PSE   = 1<< 3, // Page Size Extension
-          TSC   = 1<< 4, // Time Stamp Counter
-          MSR   = 1<< 5, // Model Specific Registers
-          PAE   = 1<< 6, // Physical Address Extension
-          MCE   = 1<< 7, // Machine Check Exception
-          CX8   = 1<< 8, // CMPXCHG8 Instruction
-          APIC  = 1<< 9, // On-chip APIC hardware
-          SEP   = 1<<11, // Fast System Call
-          MTRR  = 1<<12, // Memory type Range Registers
-          PGE   = 1<<13, // Page Global Enable
-          MCA   = 1<<14, // Machine Check Architecture
-          CMOV  = 1<<15, // Conditional MOVe Instruction
-          PAT   = 1<<16, // Page Attribute Table
-          PSE36 = 1<<17, // 36bit Page Size Extension
-          PSN   = 1<<18, // Processor Serial Number
-          CLFSH = 1<<19, // CFLUSH Instruction
-          DS    = 1<<21, // Debug Store
-          ACPI  = 1<<22, // Thermal Monitor & Software Controlled Clock
-          MMX   = 1<<23, // MultiMedia eXtension
-          FXSR  = 1<<24, // Fast Floating Point Save & Restore
-          SSE   = 1<<25, // Streaming SIMD Extension 1
-          SSE2  = 1<<26, // Streaming SIMD Extension 2
-          SS    = 1<<27, // Self Snoop
-          HTT   = 1<<28, // Hyper Threading Technology
-          TM    = 1<<29, // Thermal Monitor
-          PBE   = 1<<31, // Pend Break Enabled
-        };
-
-        /**
-         * Reference:
-         * http://datasheets.chipdb.org/Intel/x86/CPUID/24161821.pdf
-         * http://www.flounder.com/cpuid_explorer2.htm
-         */
-        enum CpuidExtendedFeatures
-        {
-          SSE3  = 1<< 0, // Streaming SIMD Extension 3
-          MW    = 1<< 3, // Mwait instruction
-          CPL   = 1<< 4, // CPL-qualified Debug Store
-          VMX   = 1<< 5, // VMX
-          EST   = 1<< 7, // Enhanced Speed Test
-          TM2   = 1<< 8, // Thermal Monitor 2
-          L1    = 1<<10, // L1 Context ID
-          CAE   = 1<<13, // CompareAndExchange 16B
-        };
-
+     * Reference:
+       * http://datasheets.chipdb.org/Intel/x86/CPUID/24161821.pdf
+       * http://www.flounder.com/cpuid_explorer2.htm
+         * CpuidFeatures
+           * FPU   = 1<< 0, // Floating-Point Unit on-chip
+           * VME   = 1<< 1, // Virtual Mode Extension
+           * DE    = 1<< 2, // Debugging Extension
+           * PSE   = 1<< 3, // Page Size Extension
+           * TSC   = 1<< 4, // Time Stamp Counter
+           * MSR   = 1<< 5, // Model Specific Registers
+           * PAE   = 1<< 6, // Physical Address Extension
+           * MCE   = 1<< 7, // Machine Check Exception
+           * CX8   = 1<< 8, // CMPXCHG8 Instruction
+           * APIC  = 1<< 9, // On-chip APIC hardware
+           * SEP   = 1<<11, // Fast System Call
+           * MTRR  = 1<<12, // Memory type Range Registers
+           * PGE   = 1<<13, // Page Global Enable
+           * MCA   = 1<<14, // Machine Check Architecture
+           * CMOV  = 1<<15, // Conditional MOVe Instruction
+           * PAT   = 1<<16, // Page Attribute Table
+           * PSE36 = 1<<17, // 36bit Page Size Extension
+           * PSN   = 1<<18, // Processor Serial Number
+           * CLFSH = 1<<19, // CFLUSH Instruction
+           * DS    = 1<<21, // Debug Store
+           * ACPI  = 1<<22, // Thermal Monitor & Software Controlled Clock
+           * MMX   = 1<<23, // MultiMedia eXtension
+           * FXSR  = 1<<24, // Fast Floating Point Save & Restore
+           * SSE   = 1<<25, // Streaming SIMD Extension 1
+           * SSE2  = 1<<26, // Streaming SIMD Extension 2
+           * SS    = 1<<27, // Self Snoop
+           * HTT   = 1<<28, // Hyper Threading Technology
+           * TM    = 1<<29, // Thermal Monitor
+           * PBE   = 1<<31, // Pend Break Enabled
+         * CpuidExtendedFeatures
+           * SSE3  = 1<< 0, // Streaming SIMD Extension 3
+           * MW    = 1<< 3, // Mwait instruction
+           * CPL   = 1<< 4, // CPL-qualified Debug Store
+           * VMX   = 1<< 5, // VMX
+           * EST   = 1<< 7, // Enhanced Speed Test
+           * TM2   = 1<< 8, // Thermal Monitor 2
+           * L1    = 1<<10, // L1 Context ID
+           * CAE   = 1<<13, // CompareAndExchange 16B
    * return boolean true when future exists or false where not exists or null when inputed unknown value
+ * array *cpuid_get_futures(boolean $showExists, boolean $showNotExists[, bool $showExtendedFutures = true] )* **NOT IMPLEMENTED**
+   * parameter $showExists - true when you need only existing futures in proccessor
+   * parameter $showNotExists - true when you need only NOT existing futures in proccessor
+   * optional parameter $showExtendedFutures - true (deafault) show extending futures in proccessor
+   * return hash array - key it is future name and value it is boolean (true/false - state of future exisis)
 
 How to compile source code ?
 -------------
