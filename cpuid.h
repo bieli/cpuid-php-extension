@@ -13,13 +13,12 @@
 #if defined(__GNUC__)
     #include <stdint.h>
 #elif defined(_WIN32)
-    #include <intrin.h>
-    typedef unsigned __int32 uint32_t;
-//TODO: add getting __codeid for WIN32
+    #error Extension compiled ONLY in POSIX OS (*BSD, Linux, *NIX)
 #endif
 
 #define INTEL_DETECT_MAGIC_CODE 0x756e6547
 #define AMD_DETECT_MAGIC_CODE 0x68747541
+
 #define CPUID_INTEL_CPU_DETECTED 1
 #define CPUID_AMD_CPU_DETECTED 2
 #define CPUID_UNKNOWN_CPU_DETECTED 0

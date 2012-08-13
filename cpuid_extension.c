@@ -6,6 +6,7 @@
 
 //TODO: ONLY Intel processors are detected now - add support for AMD
 
+
 #ifdef HAVE_CONFIG_H
 #include "config.h"
 #endif
@@ -24,6 +25,8 @@
 int ret;
 char buff[16];
 t_cpu_info cpu_info;
+
+#ifdef HAVE_CPUID_EXTENSION
 
 /* Declare the extension's callback for use by the Zend engine */
 PHP_MINIT_FUNCTION(cpuid_init);
@@ -137,3 +140,5 @@ PHP_FUNCTION(cpuid_processors_count)
 //TODO: check oteher info from OS - http://www.gnu.org/software/libc/manual/html_node/Processor-Resources.html
     RETURN_LONG(sysconf( _SC_NPROCESSORS_ONLN ));
 }
+
+#endif  /* HAVE_CPUID_EXTENSION */
