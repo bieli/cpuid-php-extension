@@ -11,22 +11,11 @@
 #include "config.h"
 #endif
 #include "php.h"
-#include "ext/standard/info.h"
-#include "cpuid.h"
-
-#define PHP_CPUID_VERSION "1.0"
-#define PHP_CPUID_EXTNAME "cpuid"
-#define PHP_CPUID_AUTHOR "Marcin Bielak <marcin.bieli@gmail.com>"
-
-
-/* Declare the content of this extension globals */
-/* (This actually defines a typedef on a structure) */
-
-int ret;
-char buff[16];
-t_cpu_info cpu_info;
 
 #ifdef HAVE_CPUID_EXTENSION
+
+#include "ext/standard/info.h"
+#include "cpuid.h"
 
 /* Declare the extension's callback for use by the Zend engine */
 PHP_MINIT_FUNCTION(cpuid_init);
@@ -40,6 +29,8 @@ PHP_FUNCTION(cpuid_processors_count);
 
 // list of custom PHP functions provided by this extension
 // set {NULL, NULL, NULL} as the last record to mark the end of list
+/* {{{ cpuid_functions[]
+ */
 static function_entry cpuid_functions[] = {
     PHP_FE(cpuid_array, NULL)
     PHP_FE(cpuid_gethostid, NULL)
@@ -47,8 +38,11 @@ static function_entry cpuid_functions[] = {
     PHP_FE(cpuid_processors_count, NULL)
     {NULL, NULL, NULL}
 };
+/* }}} */
 
 // the following code creates an entry for the module and registers it with Zend.
+/* {{{ cpuid_module_entry
+ */
 zend_module_entry cpuid_module_entry = {
 #if ZEND_MODULE_API_NO >= 20010901
     STANDARD_MODULE_HEADER,
@@ -65,12 +59,19 @@ zend_module_entry cpuid_module_entry = {
 #endif
     STANDARD_MODULE_PROPERTIES
 };
+/* }}} */
 
+
+#ifdef COMPILE_DL_CPUID_EXTENSION
 ZEND_GET_MODULE(cpuid)
+#endif
 
 
 /*
  * implementation of a custom cpuid_functions
+ */
+
+/* {{{ PHP_MINIT_FUNCTION
  */
 PHP_MINIT_FUNCTION(cpuid_init)
 {
@@ -85,7 +86,10 @@ PHP_MINIT_FUNCTION(cpuid_init)
 
     return SUCCESS;
 }
+/* }}} */
 
+/* {{{ PHP_MINFO_FUNCTION
+ */
 PHP_MINFO_FUNCTION(cpuid_info)
 {
     php_info_print_table_start();
@@ -94,7 +98,10 @@ PHP_MINFO_FUNCTION(cpuid_info)
     php_info_print_table_row(2, "Author", PHP_CPUID_AUTHOR);
     php_info_print_table_end();
 }
+/* }}} */
 
+/* {{{ proto array cpuid_array()
+   Return hash array with CPU specific numerical information */
 PHP_FUNCTION(cpuid_array)
 {
     array_init(return_value);
@@ -123,22 +130,44 @@ PHP_FUNCTION(cpuid_array)
 
     add_assoc_string(return_value, "extended_family", buff, 1);
 }
+/* }}} */
 
+/* {{{ proto int cpuid_gethostid()
+   Returns value from system call gethostid()  */
 PHP_FUNCTION(cpuid_gethostid)
 {
     RETURN_LONG(gethostid());
 }
+/* }}} */
 
+/* {{{ proto int cpuid_cpu_detected()
+   Return return values for one of declarated constant:
+    - CPUID_INTEL_CPU_DETECTED - when detected Intel proccessor
+    - CPUID_AMD_CPU_DETECTED - when detected AMD proccessor
+    - CPUID_UNKNOWN_CPU_DETECTED - when detected unknown proccessor */
 PHP_FUNCTION(cpuid_cpu_detected)
 {
     RETURN_LONG(cpu_info.cpu_detected);
 }
+/* }}} */
 
+/* {{{ proto int cpuid_cpu_detected()
+   Return the number of processors which are currently online (i.e., available) in OS */
 PHP_FUNCTION(cpuid_processors_count)
 {
 //TODO: implementing for other OS - http://stackoverflow.com/questions/150355/programmatically-find-the-number-of-cores-on-a-machine
 //TODO: check oteher info from OS - http://www.gnu.org/software/libc/manual/html_node/Processor-Resources.html
     RETURN_LONG(sysconf( _SC_NPROCESSORS_ONLN ));
 }
+/* }}} */
 
 #endif  /* HAVE_CPUID_EXTENSION */
+
+/*
+ * Local variables:
+ * tab-width: 4
+ * c-basic-offset: 4
+ * End:
+ * vim600: noet sw=4 ts=4 fdm=marker
+ * vim<600: noet sw=4 ts=4
+ */
