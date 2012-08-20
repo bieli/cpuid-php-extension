@@ -1,7 +1,7 @@
 --TEST--
 CPUID PHP extension cpuid_array() method tests
 --SKIPIF--
-<?php if (!extension_loaded("cpuid_extension")) print "skip"; ?>
+<?php if (!extension_loaded("cpuid")) print "skip"; ?>
 --FILE--
 <?php
 
