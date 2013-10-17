@@ -10,8 +10,8 @@ before_script:
 
 script:
   - ./bin/travis-cpuid.sh
-  - php --ri cpuid_extension
-  - phpunit
+#  - php --ri cpuid_extension
+#  - phpunit
 
 notifications:
   email: false
