@@ -31,7 +31,7 @@ PHP_FUNCTION(cpuid_processors_count);
 // set {NULL, NULL, NULL} as the last record to mark the end of list
 /* {{{ cpuid_functions[]
  */
-static function_entry cpuid_functions[] = {
+static zend_function_entry cpuid_functions[] = {
     PHP_FE(cpuid_array, NULL)
     PHP_FE(cpuid_gethostid, NULL)
     PHP_FE(cpuid_cpu_detected, NULL)

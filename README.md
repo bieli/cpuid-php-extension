@@ -90,7 +90,7 @@ You need below packages:
  * php5-dev
  * php5-cli
  * gcc
- * build-essentials
+ * build-essential
  * make
  * git
 
@@ -101,7 +101,8 @@ First clone repository:
 Next compile extension:
 
     $ phpize
-    $ ./configure OR
+    $ ./configure
+    # OR
     $ make
     $ sudo make install
 
