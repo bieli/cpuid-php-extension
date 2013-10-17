@@ -14,11 +14,12 @@ git clone http://github.com/bieli/cpuid-php-extension.git
 cd cpuid-php-extension
 
 phpize
+#TODO: need BUGFIX for -m64 architecture
 CFLAGS="-m32" ./configure
 make
-make test
+#make test
 
-sudo make install
+#sudo make install
 #echo "extension=cpuid_extension.so" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
 
 ###PHP_LIB_PATH=`grep -r cpuid_extension.so  ~/.phpenv/versions/$(phpenv version-name)/lib/php/extensions/ | grep -oP "\/.[^\.]*.so"`
