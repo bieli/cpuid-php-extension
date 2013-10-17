@@ -9,8 +9,8 @@ before_script:
   - composer install
 
 script:
-  - ./bin/travis-yaml.sh
-  - php --ri yaml
+  - ./bin/travis-cpuid.sh
+  - php --ri cpuid
   - phpunit
 
 notifications:
