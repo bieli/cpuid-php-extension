@@ -28,6 +28,14 @@ echo "PHP_LIB_PATH: '$PHP_LIB_PATH'"
 ls $PHP_LIB_PATH -la
 echo "+==================================================================+"
 
+sudo mkdir -p /lib/php/extensions/no-debug-zts-20100525
+sudo chmod a+wrx /lib/php/extensions/no-debug-zts-20100525
 sudo cp $PHP_LIB_PATH /lib/php/extensions/no-debug-zts-20100525/cpuid_extension.so
+sudo chmod a+wrx /lib/php/extensions/no-debug-zts-20100525/cpuid_extension.so
+
+echo "+==================================================================+"
+ls /lib/php/extensions/no-debug-zts-20100525/cpuid_extension.so -la
+echo "+==================================================================+"
+
 
 echo "extension=$PHP_LIB_PATH" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
