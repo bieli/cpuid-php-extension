@@ -1,4 +1,4 @@
-cpuid-php-extension
+# cpuid-php-extension [![Build Status](https://travis-ci.org/bieli/cpuid-php-extension.png)](https://travis-ci.org/bieli/cpuid-php-extension) #
 ===================
 
 CPUID - extension for PHP language allow to showing short CPU's info. (on installed server)
