@@ -4,6 +4,10 @@ php:
   - 5.4
   - 5.5
 
+before_script:
+  - composer selfupdate
+  - composer install
+
 script:
   - ./bin/travis-yaml.sh
   - php --ri yaml
