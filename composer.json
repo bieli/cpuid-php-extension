@@ -1,0 +1,19 @@
+{
+    "name": "bieli/cpuid-php-extension",
+    "type": "library",
+    "description": "CPUID - extension for PHP language allow to showing short CPU's info. (on installed server)",
+    "keywords": ["bieli", "cpuid", "php", "extension", "cpuid-php-extension"],
+    "homepage": "http://titon.io",
+    "license": "BSD-2",
+    "authors": [
+        {
+            "name": "Marcin Bielak",
+            "homepage": "http://bieli.net"
+        }
+    ],
+    "require": {
+        "php": ">=5.4.0",
+        "ext-mbstring": "*",
+        "ext-fileinfo": "*"
+    }
+}
