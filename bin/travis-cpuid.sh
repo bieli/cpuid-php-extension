@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# Travis CI command script for compiling and installing cpuid_extension for PHP
 
 set -e
 
@@ -17,4 +18,9 @@ CFLAGS="-m32" ./configure
 make
 
 sudo make install
-echo "extension=cpuid_extension.so" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
+#echo "extension=cpuid_extension.so" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
+
+PHP_LIB_PATH=`grep -r cpuid_extension.so  ~/.phpenv/versions/$(phpenv version-name)/lib/php/extensions/ | grep -oP "\/.[^\.]*.so"`
+#PHP_LIB_PATH=~/.phpenv/versions/$(phpenv version-name)/lib/php/extensions/no-debug-zts-20100525/cpuid_extension.so
+
+echo "extension=$PHP_LIB_PATH" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
