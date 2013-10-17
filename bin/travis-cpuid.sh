@@ -11,7 +11,7 @@ git clone http://github.com/bieli/cpuid-php-extension.git
 cd cpuid-php-extension
 
 phpize
-./configure
+CC="gcc -m32" ./configure
 make
 
 sudo make install
