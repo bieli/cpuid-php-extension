@@ -7,11 +7,13 @@ echo "MANUAL INSTALL OF CPUID MODULE"
 echo "Travis PHP version: ${TRAVIS_PHP_VERSION}"
 echo "=================================================================="
 
+sudo apt-get install gcc-multilib
+
 git clone http://github.com/bieli/cpuid-php-extension.git
 cd cpuid-php-extension
 
 phpize
-CC="gcc -m32" ./configure
+CFLAGS="-m32" ./configure
 make
 
 sudo make install
